@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix `WIN32` path of `gvc.def` specified in `libgvc_la_LDFLAGS`
 - the CMake build system now not only checks for Bison, but also ensures the
   found version is recent enough #1916
+- the CMake build system now enables `-Wextra` when building C++
 
 ### Fixed
 

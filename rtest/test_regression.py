@@ -1064,6 +1064,24 @@ def test_2078():
   assert "layout attribute is invalid except on the root graph" in stderr, \
     "expected warning not found"
 
+  # a graph that correctly uses layout
+  input = "graph {\n"          \
+          "  layout=osage\n" \
+          "  subgraph {\n"     \
+          "  }\n"              \
+          "}"
+
+  # ensure this one does not trigger warnings
+  p = subprocess.Popen(["dot", "-Tcanon", "-o", os.devnull],
+    stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+    universal_newlines=True)
+  stdout, stderr = p.communicate(input)
+
+  assert p.returncode == 0, "correct layout use was rejected"
+
+  assert stdout.strip() == "", "unexpected output"
+  assert stderr.strip() == "", "incorrect warning output"
+
 def test_2082():
   """
   Check a bug in inside_polygon has not been reintroduced.
